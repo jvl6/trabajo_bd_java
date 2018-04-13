@@ -16,6 +16,8 @@ public class App extends javax.swing.JFrame {
      */
     public App() {
         initComponents();
+        setTitle("VeteriSoft v0.1.1");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -27,17 +29,181 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grpCastrado = new javax.swing.ButtonGroup();
+        grpAdoptado = new javax.swing.ButtonGroup();
+        lblTitulo = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblMicrochip = new javax.swing.JLabel();
+        lblEspecie = new javax.swing.JLabel();
+        lblSexo = new javax.swing.JLabel();
+        sprSeparador = new javax.swing.JSeparator();
+        lblRaza = new javax.swing.JLabel();
+        lblColor = new javax.swing.JLabel();
+        lblNacimiento = new javax.swing.JLabel();
+        lblCastrado = new javax.swing.JLabel();
+        lblAdoptado = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtMicrochip = new javax.swing.JTextField();
+        txtEspecie = new javax.swing.JTextField();
+        txtRaza = new javax.swing.JTextField();
+        txtColor = new javax.swing.JTextField();
+        txtNacimiento = new javax.swing.JTextField();
+        opAdoptadoTrue = new javax.swing.JRadioButton();
+        opAdoptadoFalse = new javax.swing.JRadioButton();
+        btnRegistro = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnAcerca = new javax.swing.JButton();
+        cboCastradoTrue = new javax.swing.JRadioButton();
+        cboCastradoFalse = new javax.swing.JRadioButton();
+        cboSexo = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblTitulo.setText("Registro de Animales");
+
+        lblNombre.setText("Nombre:");
+
+        lblMicrochip.setText("Microchip:");
+
+        lblEspecie.setText("Especie:");
+
+        lblSexo.setText("Sexo:");
+
+        lblRaza.setText("Raza:");
+
+        lblColor.setText("Color:");
+
+        lblNacimiento.setText("Nacimiento:");
+
+        lblCastrado.setText("Estado reproductivo:");
+
+        lblAdoptado.setText("Adoptado:");
+
+        grpAdoptado.add(opAdoptadoTrue);
+        opAdoptadoTrue.setText("Sí");
+
+        grpAdoptado.add(opAdoptadoFalse);
+        opAdoptadoFalse.setText("No");
+
+        btnRegistro.setText("Registrar");
+
+        btnLimpiar.setText("Limpiar");
+
+        btnAcerca.setText("Acerca de...");
+
+        grpCastrado.add(cboCastradoTrue);
+        cboCastradoTrue.setText("Castrado");
+
+        grpCastrado.add(cboCastradoFalse);
+        cboCastradoFalse.setText("No Castrado");
+
+        cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLimpiar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAcerca)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRegistro))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblMicrochip)
+                                        .addComponent(lblNombre)
+                                        .addComponent(lblEspecie)
+                                        .addComponent(lblSexo)
+                                        .addComponent(lblRaza)
+                                        .addComponent(lblColor))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtMicrochip)
+                                        .addComponent(txtEspecie)
+                                        .addComponent(txtRaza)
+                                        .addComponent(txtColor)
+                                        .addComponent(txtNombre)
+                                        .addComponent(cboSexo, 0, 200, Short.MAX_VALUE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblNacimiento)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtNacimiento))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblCastrado)
+                                        .addComponent(lblAdoptado))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cboCastradoTrue)
+                                        .addComponent(opAdoptadoTrue))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(opAdoptadoFalse)
+                                        .addComponent(cboCastradoFalse)))))))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addComponent(sprSeparador)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sprSeparador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMicrochip)
+                    .addComponent(txtMicrochip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEspecie)
+                    .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSexo)
+                    .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRaza))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblColor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNacimiento)
+                    .addComponent(txtNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCastrado)
+                    .addComponent(cboCastradoTrue)
+                    .addComponent(cboCastradoFalse))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAdoptado)
+                    .addComponent(opAdoptadoTrue)
+                    .addComponent(opAdoptadoFalse))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnAcerca)
+                    .addComponent(btnRegistro))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -54,7 +220,7 @@ public class App extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -79,5 +245,32 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAcerca;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRegistro;
+    private javax.swing.JRadioButton cboCastradoFalse;
+    private javax.swing.JRadioButton cboCastradoTrue;
+    private javax.swing.JComboBox<String> cboSexo;
+    private javax.swing.ButtonGroup grpAdoptado;
+    private javax.swing.ButtonGroup grpCastrado;
+    private javax.swing.JLabel lblAdoptado;
+    private javax.swing.JLabel lblCastrado;
+    private javax.swing.JLabel lblColor;
+    private javax.swing.JLabel lblEspecie;
+    private javax.swing.JLabel lblMicrochip;
+    private javax.swing.JLabel lblNacimiento;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblRaza;
+    private javax.swing.JLabel lblSexo;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JRadioButton opAdoptadoFalse;
+    private javax.swing.JRadioButton opAdoptadoTrue;
+    private javax.swing.JSeparator sprSeparador;
+    private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtEspecie;
+    private javax.swing.JTextField txtMicrochip;
+    private javax.swing.JTextField txtNacimiento;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables
 }
