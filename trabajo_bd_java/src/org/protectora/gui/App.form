@@ -6,11 +6,28 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="grpAdoptado">
     </Component>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="miRegistro">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Archivo"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ver animales registrados"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -40,12 +57,25 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnAcerca" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                               <Component id="btnRegistro" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblCastrado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAdoptado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="opEsterilizado" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="opNoEsterilizado" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="chkAdoptado" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblMicrochip" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -54,6 +84,7 @@
                                       <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblRaza" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblColor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -63,34 +94,14 @@
                                       <Component id="txtColor" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtNombre" max="32767" attributes="0"/>
                                       <Component id="cboSexo" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblNacimiento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNacimiento" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblCastrado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblAdoptado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace pref="9" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cboCastradoTrue" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="opAdoptadoTrue" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="opAdoptadoFalse" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cboCastradoFalse" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMeses" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
           <Component id="sprSeparador" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -135,24 +146,22 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMeses" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblCastrado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cboCastradoTrue" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cboCastradoFalse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opEsterilizado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opNoEsterilizado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblAdoptado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="opAdoptadoTrue" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="opAdoptadoFalse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chkAdoptado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="7" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAcerca" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRegistro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -200,7 +209,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblNacimiento">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nacimiento:"/>
+        <Property name="text" type="java.lang.String" value="Meses:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCastrado">
@@ -223,53 +232,34 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtColor">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNacimiento">
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="opAdoptadoTrue">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="grpAdoptado"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="S&#xed;"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="opAdoptadoFalse">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="grpAdoptado"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="No"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnRegistro">
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistroActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLimpiar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAcerca">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Acerca de..."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="cboCastradoTrue">
+    <Component class="javax.swing.JRadioButton" name="opEsterilizado">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="grpCastrado"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Castrado"/>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Esterilizado"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="cboCastradoFalse">
+    <Component class="javax.swing.JRadioButton" name="opNoEsterilizado">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="grpCastrado"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="No Castrado"/>
+        <Property name="text" type="java.lang.String" value="No Esterilizado"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cboSexo">
@@ -286,6 +276,13 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkAdoptado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S&#xed;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMeses">
     </Component>
   </SubComponents>
 </Form>

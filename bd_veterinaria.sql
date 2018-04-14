@@ -5,16 +5,18 @@ USE bd_veterinaria;
 CREATE TABLE animal(
 	id INT AUTO_INCREMENT,
     nombre VARCHAR(100),
-	microchip INT,
+	microchip LONG,
 	especie VARCHAR(100),
 	sexo VARCHAR(100),
 	raza VARCHAR(100),
 	color VARCHAR(100),
-	nacimiento DATETIME,
-	estado_reproductivo BOOLEAN,
+	meses INT,
+	esterilizado BOOLEAN,
     adoptado BOOLEAN,
     PRIMARY KEY(id)
-); -- SELECT * FROM animal;
+); 
+SELECT * FROM animal;
+DROP TABLE animal;
 
 /**
 Raza de Gatos: https://www.purina.es/gato/razas-de-gato/tipos-de-razas-de-gato

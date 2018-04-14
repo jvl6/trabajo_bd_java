@@ -5,6 +5,11 @@
  */
 package org.protectora.gui;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.protectora.model.*;
+
 /**
  *
  * @author Jorge Anjel/ Sergio Herrera/ Javier Vergara
@@ -14,10 +19,23 @@ public class App extends javax.swing.JFrame {
     /**
      * Creates new form App
      */
+    private Conexion con;
+
     public App() {
         initComponents();
         setTitle("VeteriSoft v0.1.1");
         setLocationRelativeTo(null);
+
+        cboSexo.removeAllItems();
+        cboSexo.addItem("Macho");
+        cboSexo.addItem("Hembra");
+
+        try {
+            con = new Conexion("localhost", "bd_veterinaria", "root", "");
+            System.out.println("Todo OK");
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
@@ -47,15 +65,16 @@ public class App extends javax.swing.JFrame {
         txtEspecie = new javax.swing.JTextField();
         txtRaza = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
-        txtNacimiento = new javax.swing.JTextField();
-        opAdoptadoTrue = new javax.swing.JRadioButton();
-        opAdoptadoFalse = new javax.swing.JRadioButton();
         btnRegistro = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        btnAcerca = new javax.swing.JButton();
-        cboCastradoTrue = new javax.swing.JRadioButton();
-        cboCastradoFalse = new javax.swing.JRadioButton();
+        opEsterilizado = new javax.swing.JRadioButton();
+        opNoEsterilizado = new javax.swing.JRadioButton();
         cboSexo = new javax.swing.JComboBox<>();
+        chkAdoptado = new javax.swing.JCheckBox();
+        txtMeses = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        miRegistro = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,31 +92,40 @@ public class App extends javax.swing.JFrame {
 
         lblColor.setText("Color:");
 
-        lblNacimiento.setText("Nacimiento:");
+        lblNacimiento.setText("Meses:");
 
         lblCastrado.setText("Estado reproductivo:");
 
         lblAdoptado.setText("Adoptado:");
 
-        grpAdoptado.add(opAdoptadoTrue);
-        opAdoptadoTrue.setText("Sí");
-
-        grpAdoptado.add(opAdoptadoFalse);
-        opAdoptadoFalse.setText("No");
-
         btnRegistro.setText("Registrar");
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
 
-        btnAcerca.setText("Acerca de...");
+        grpCastrado.add(opEsterilizado);
+        opEsterilizado.setSelected(true);
+        opEsterilizado.setText("Esterilizado");
 
-        grpCastrado.add(cboCastradoTrue);
-        cboCastradoTrue.setText("Castrado");
-
-        grpCastrado.add(cboCastradoFalse);
-        cboCastradoFalse.setText("No Castrado");
+        grpCastrado.add(opNoEsterilizado);
+        opNoEsterilizado.setText("No Esterilizado");
 
         cboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        chkAdoptado.setText("Sí");
+
+        miRegistro.setText("Archivo");
+
+        jMenuItem1.setText("Ver animales registrados");
+        miRegistro.add(jMenuItem1);
+
+        jMenuBar1.add(miRegistro);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,11 +141,20 @@ public class App extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnLimpiar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAcerca)
-                                .addGap(18, 18, 18)
+                                .addGap(137, 137, 137)
                                 .addComponent(btnRegistro))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblCastrado)
+                                        .addComponent(lblAdoptado))
+                                    .addGap(9, 9, 9)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(opEsterilizado)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(opNoEsterilizado))
+                                        .addComponent(chkAdoptado)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblMicrochip)
@@ -125,7 +162,8 @@ public class App extends javax.swing.JFrame {
                                         .addComponent(lblEspecie)
                                         .addComponent(lblSexo)
                                         .addComponent(lblRaza)
-                                        .addComponent(lblColor))
+                                        .addComponent(lblColor)
+                                        .addComponent(lblNacimiento))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtMicrochip)
@@ -133,24 +171,9 @@ public class App extends javax.swing.JFrame {
                                         .addComponent(txtRaza)
                                         .addComponent(txtColor)
                                         .addComponent(txtNombre)
-                                        .addComponent(cboSexo, 0, 200, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblNacimiento)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtNacimiento))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCastrado)
-                                        .addComponent(lblAdoptado))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cboCastradoTrue)
-                                        .addComponent(opAdoptadoTrue))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(opAdoptadoFalse)
-                                        .addComponent(cboCastradoFalse)))))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                                        .addComponent(cboSexo, 0, 200, Short.MAX_VALUE)
+                                        .addComponent(txtMeses)))))))
+                .addContainerGap(12, Short.MAX_VALUE))
             .addComponent(sprSeparador)
         );
         layout.setVerticalGroup(
@@ -187,27 +210,82 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNacimiento)
-                    .addComponent(txtNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCastrado)
-                    .addComponent(cboCastradoTrue)
-                    .addComponent(cboCastradoFalse))
+                    .addComponent(opEsterilizado)
+                    .addComponent(opNoEsterilizado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdoptado)
-                    .addComponent(opAdoptadoTrue)
-                    .addComponent(opAdoptadoFalse))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(chkAdoptado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
-                    .addComponent(btnAcerca)
                     .addComponent(btnRegistro))
                 .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        String nombre,
+                especie,
+                sexo,
+                raza,
+                color;
+        long microchip;
+        int meses;
+        boolean esterilizado = false;
+        boolean adoptado = false;
+
+        nombre = txtNombre.getText();
+        microchip = Long.parseLong(txtMicrochip.getText());
+        especie = txtEspecie.getText();
+        sexo = cboSexo.getSelectedItem().toString();
+        raza = txtRaza.getText();
+        color = txtColor.getText();
+        meses = Integer.parseInt(txtMeses.getText());
+
+        if (opEsterilizado.isSelected()) {
+            esterilizado = true;
+        }
+
+        if (chkAdoptado.isSelected()) {
+            adoptado = true;
+        }
+
+        String consulta = "INSERT INTO animal VALUES(NULL,'" 
+                + nombre + "',"
+                + microchip + ",'" 
+                + especie + "','" 
+                + sexo + "','" 
+                + raza + "','" 
+                + color + "'," 
+                + meses + "," 
+                + esterilizado + "," 
+                + adoptado + ");";
+
+        try {
+            con.ejecutar(consulta);
+            
+            txtNombre.setText(null);
+            txtMicrochip.setText(null);
+            txtEspecie.setText(null);
+            cboSexo.setSelectedIndex(0);
+            txtRaza.setText(null);
+            txtColor.setText(null);
+            txtMeses.setText(null);
+            opEsterilizado.setSelected(true);
+            chkAdoptado.setSelected(false);
+            
+            txtNombre.requestFocus();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,14 +323,14 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcerca;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegistro;
-    private javax.swing.JRadioButton cboCastradoFalse;
-    private javax.swing.JRadioButton cboCastradoTrue;
     private javax.swing.JComboBox<String> cboSexo;
+    private javax.swing.JCheckBox chkAdoptado;
     private javax.swing.ButtonGroup grpAdoptado;
     private javax.swing.ButtonGroup grpCastrado;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblAdoptado;
     private javax.swing.JLabel lblCastrado;
     private javax.swing.JLabel lblColor;
@@ -263,13 +341,14 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel lblRaza;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JRadioButton opAdoptadoFalse;
-    private javax.swing.JRadioButton opAdoptadoTrue;
+    private javax.swing.JMenu miRegistro;
+    private javax.swing.JRadioButton opEsterilizado;
+    private javax.swing.JRadioButton opNoEsterilizado;
     private javax.swing.JSeparator sprSeparador;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtEspecie;
+    private javax.swing.JTextField txtMeses;
     private javax.swing.JTextField txtMicrochip;
-    private javax.swing.JTextField txtNacimiento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables
