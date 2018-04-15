@@ -20,6 +20,10 @@ public class Conexion {
     private Connection con;
     private Statement sen; // Sentencia o query.
     private ResultSet rs;
+    
+    public Conexion(){
+    
+    };
 
     public Conexion(String server, String bd, String user, String pass)
             throws ClassNotFoundException, SQLException {
@@ -41,7 +45,7 @@ public class Conexion {
 
     public static void main(String[] args) {
         try {
-            Conexion c = new Conexion("localhost", "bd_java", "root", "");
+            Conexion c = new Conexion("localhost", "bd_veterinaria", "root", "");
             System.out.println("Todo OK");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

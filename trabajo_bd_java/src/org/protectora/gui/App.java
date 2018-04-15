@@ -8,6 +8,9 @@ package org.protectora.gui;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.protectora.model.*;
 
 /**
@@ -19,12 +22,13 @@ public class App extends javax.swing.JFrame {
     /**
      * Creates new form App
      */
-    private Conexion con;
+    public Conexion con;
 
     public App() {
         initComponents();
         setTitle("VeteriSoft v0.1.1");
         setLocationRelativeTo(null);
+        pnlNumero.setVisible(false);
 
         cboSexo.removeAllItems();
         cboSexo.addItem("Macho");
@@ -61,7 +65,6 @@ public class App extends javax.swing.JFrame {
         lblCastrado = new javax.swing.JLabel();
         lblAdoptado = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtMicrochip = new javax.swing.JTextField();
         txtEspecie = new javax.swing.JTextField();
         txtRaza = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
@@ -72,6 +75,9 @@ public class App extends javax.swing.JFrame {
         cboSexo = new javax.swing.JComboBox<>();
         chkAdoptado = new javax.swing.JCheckBox();
         txtMeses = new javax.swing.JTextField();
+        pnlNumero = new javax.swing.JPanel();
+        txtMicrochip = new javax.swing.JTextField();
+        chkMicrochip = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         miRegistro = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -106,6 +112,11 @@ public class App extends javax.swing.JFrame {
         });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         grpCastrado.add(opEsterilizado);
         opEsterilizado.setSelected(true);
@@ -118,9 +129,38 @@ public class App extends javax.swing.JFrame {
 
         chkAdoptado.setText("Sí");
 
+        pnlNumero.setBorder(javax.swing.BorderFactory.createTitledBorder("numero"));
+
+        javax.swing.GroupLayout pnlNumeroLayout = new javax.swing.GroupLayout(pnlNumero);
+        pnlNumero.setLayout(pnlNumeroLayout);
+        pnlNumeroLayout.setHorizontalGroup(
+            pnlNumeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtMicrochip, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        pnlNumeroLayout.setVerticalGroup(
+            pnlNumeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNumeroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtMicrochip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        chkMicrochip.setText("Si");
+        chkMicrochip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMicrochipActionPerformed(evt);
+            }
+        });
+
         miRegistro.setText("Archivo");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Ver animales registrados");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         miRegistro.add(jMenuItem1);
 
         jMenuBar1.add(miRegistro);
@@ -141,39 +181,42 @@ public class App extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnLimpiar)
-                                .addGap(137, 137, 137)
+                                .addGap(123, 123, 123)
                                 .addComponent(btnRegistro))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAdoptado)
+                                .addGap(39, 39, 39)
+                                .addComponent(chkAdoptado))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblMicrochip)
+                                            .addComponent(lblNombre)
+                                            .addComponent(lblEspecie)
+                                            .addComponent(lblSexo)
+                                            .addComponent(lblRaza)
+                                            .addComponent(lblColor)
+                                            .addComponent(lblNacimiento))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtMeses)
+                                            .addComponent(txtColor)
+                                            .addComponent(txtRaza)
+                                            .addComponent(cboSexo, 0, 162, Short.MAX_VALUE)
+                                            .addComponent(txtEspecie)
+                                            .addComponent(txtNombre)
+                                            .addComponent(pnlNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(chkMicrochip)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(lblCastrado)
-                                        .addComponent(lblAdoptado))
-                                    .addGap(9, 9, 9)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(opEsterilizado)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(opNoEsterilizado))
-                                        .addComponent(chkAdoptado)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblMicrochip)
-                                        .addComponent(lblNombre)
-                                        .addComponent(lblEspecie)
-                                        .addComponent(lblSexo)
-                                        .addComponent(lblRaza)
-                                        .addComponent(lblColor)
-                                        .addComponent(lblNacimiento))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtMicrochip)
-                                        .addComponent(txtEspecie)
-                                        .addComponent(txtRaza)
-                                        .addComponent(txtColor)
-                                        .addComponent(txtNombre)
-                                        .addComponent(cboSexo, 0, 200, Short.MAX_VALUE)
-                                        .addComponent(txtMeses)))))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(opEsterilizado)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(opNoEsterilizado)))))
+                .addContainerGap())
             .addComponent(sprSeparador)
         );
         layout.setVerticalGroup(
@@ -187,44 +230,49 @@ public class App extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMicrochip)
-                    .addComponent(txtMicrochip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(chkMicrochip))
+                .addGap(17, 17, 17)
+                .addComponent(pnlNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEspecie)
                     .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSexo)
-                    .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRaza))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblColor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNacimiento)
-                    .addComponent(txtMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCastrado)
-                    .addComponent(opEsterilizado)
-                    .addComponent(opNoEsterilizado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdoptado)
-                    .addComponent(chkAdoptado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar)
-                    .addComponent(btnRegistro))
-                .addGap(27, 27, 27))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRaza)
+                            .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblColor)
+                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNacimiento)
+                            .addComponent(txtMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCastrado)
+                            .addComponent(opEsterilizado)
+                            .addComponent(opNoEsterilizado))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAdoptado)
+                            .addComponent(chkAdoptado))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLimpiar)
+                            .addComponent(btnRegistro))
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSexo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -242,7 +290,13 @@ public class App extends javax.swing.JFrame {
         boolean adoptado = false;
 
         nombre = txtNombre.getText();
-        microchip = Long.parseLong(txtMicrochip.getText());
+
+        if (chkMicrochip.isSelected()) {
+            microchip = Long.parseLong(txtMicrochip.getText());
+        } else {
+            microchip = 0;
+        }
+
         especie = txtEspecie.getText();
         sexo = cboSexo.getSelectedItem().toString();
         raza = txtRaza.getText();
@@ -257,20 +311,20 @@ public class App extends javax.swing.JFrame {
             adoptado = true;
         }
 
-        String consulta = "INSERT INTO animal VALUES(NULL,'" 
+        String consulta = "INSERT INTO animal VALUES(NULL,'"
                 + nombre + "',"
-                + microchip + ",'" 
-                + especie + "','" 
-                + sexo + "','" 
-                + raza + "','" 
-                + color + "'," 
-                + meses + "," 
-                + esterilizado + "," 
+                + microchip + ",'"
+                + especie + "','"
+                + sexo + "','"
+                + raza + "','"
+                + color + "',"
+                + meses + ","
+                + esterilizado + ","
                 + adoptado + ");";
 
         try {
             con.ejecutar(consulta);
-            
+
             txtNombre.setText(null);
             txtMicrochip.setText(null);
             txtEspecie.setText(null);
@@ -280,12 +334,48 @@ public class App extends javax.swing.JFrame {
             txtMeses.setText(null);
             opEsterilizado.setSelected(true);
             chkAdoptado.setSelected(false);
-            
+
             txtNombre.requestFocus();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtNombre.setText(null);
+        txtMicrochip.setText(null);
+        txtEspecie.setText(null);
+        cboSexo.setSelectedIndex(0);
+        txtRaza.setText(null);
+        txtColor.setText(null);
+        txtMeses.setText(null);
+        opEsterilizado.setSelected(true);
+        chkAdoptado.setSelected(false);
+
+        txtNombre.requestFocus();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void chkMicrochipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMicrochipActionPerformed
+        if (chkMicrochip.isSelected()) {
+            pnlNumero.setVisible(true);
+        } else {
+            pnlNumero.setVisible(false);
+        }
+    }//GEN-LAST:event_chkMicrochipActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Tabla t = null;
+        try {
+            t = new Tabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        t.setVisible(true);
+
+        App a = new App();
+
+        a.setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,37 +386,33 @@ public class App extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new App().setVisible(true);
-            }
-        });
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        App ap = new App();
+        ap.setVisible(true);
+        ap.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JComboBox<String> cboSexo;
     private javax.swing.JCheckBox chkAdoptado;
+    private javax.swing.JCheckBox chkMicrochip;
     private javax.swing.ButtonGroup grpAdoptado;
     private javax.swing.ButtonGroup grpCastrado;
     private javax.swing.JMenuBar jMenuBar1;
@@ -344,6 +430,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JMenu miRegistro;
     private javax.swing.JRadioButton opEsterilizado;
     private javax.swing.JRadioButton opNoEsterilizado;
+    private javax.swing.JPanel pnlNumero;
     private javax.swing.JSeparator sprSeparador;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtEspecie;
