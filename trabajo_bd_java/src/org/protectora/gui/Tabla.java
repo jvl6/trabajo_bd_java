@@ -17,6 +17,8 @@ public class Tabla extends javax.swing.JFrame {
     public Tabla() throws SQLException {
         initComponents();
         mostrar();
+        
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     private void mostrar() throws SQLException {

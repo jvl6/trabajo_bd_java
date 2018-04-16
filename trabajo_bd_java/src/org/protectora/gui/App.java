@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.protectora.model.*;
@@ -79,10 +80,13 @@ public class App extends javax.swing.JFrame {
         txtMicrochip = new javax.swing.JTextField();
         chkMicrochip = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
-        miRegistro = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menu = new javax.swing.JMenu();
+        miRegistro = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        miAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lblTitulo.setText("Registro de Animales");
 
@@ -152,18 +156,27 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        miRegistro.setText("Archivo");
+        menu.setText("Archivo");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Ver animales registrados");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        miRegistro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        miRegistro.setText("Ver animales registrados");
+        miRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                miRegistroActionPerformed(evt);
             }
         });
-        miRegistro.add(jMenuItem1);
+        menu.add(miRegistro);
+        menu.add(jSeparator1);
 
-        jMenuBar1.add(miRegistro);
+        miAcercaDe.setText("Acerca de...");
+        miAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAcercaDeActionPerformed(evt);
+            }
+        });
+        menu.add(miAcercaDe);
+
+        jMenuBar1.add(menu);
 
         setJMenuBar(jMenuBar1);
 
@@ -284,24 +297,51 @@ public class App extends javax.swing.JFrame {
                 sexo,
                 raza,
                 color;
-        long microchip;
-        int meses;
+        long microchip = 0;
+        int meses = 0;
         boolean esterilizado = false;
         boolean adoptado = false;
 
         nombre = txtNombre.getText();
 
-        if (chkMicrochip.isSelected()) {
-            microchip = Long.parseLong(txtMicrochip.getText());
-        } else {
-            microchip = 0;
+        try {
+            if (chkMicrochip.isSelected()) {
+                microchip = Long.parseLong(txtMicrochip.getText());
+            } else {
+                microchip = 0;
+            }
+        } catch (Exception ex) {
+            int tipo = JOptionPane.ERROR_MESSAGE;
+            String titulo = "Ingreso inválido";
+            String mensaje = "El microchip debe contener sólo números.";
+
+            JOptionPane.showMessageDialog(null, mensaje, titulo, tipo);
+
+            txtMicrochip.setText(null);
+            txtMicrochip.requestFocus();
+
+            return;
         }
 
         especie = txtEspecie.getText();
         sexo = cboSexo.getSelectedItem().toString();
         raza = txtRaza.getText();
         color = txtColor.getText();
-        meses = Integer.parseInt(txtMeses.getText());
+
+        try {
+            meses = Integer.parseInt(txtMeses.getText());
+        } catch (Exception ex) {
+            int tipo = JOptionPane.ERROR_MESSAGE;
+            String mensaje = "El número de meses debe contener sólo números.";
+            String titulo = "Ingreso inválido";
+
+            JOptionPane.showMessageDialog(null, mensaje, titulo, tipo);
+
+            txtMeses.setText(null);
+            txtMeses.requestFocus();
+
+            return;
+        }
 
         if (opEsterilizado.isSelected()) {
             esterilizado = true;
@@ -363,10 +403,12 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chkMicrochipActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void miRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRegistroActionPerformed
         Tabla t = null;
         try {
             t = new Tabla();
+
+            t.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -375,7 +417,16 @@ public class App extends javax.swing.JFrame {
         App a = new App();
 
         a.setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_miRegistroActionPerformed
+
+    private void miAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAcercaDeActionPerformed
+        int tipo = JOptionPane.INFORMATION_MESSAGE;
+        String mensaje = "Creado por Jorge Anjel, Sergio Herrera y Javier Vergara.\n\n"
+                + "2018";
+        String titulo = "Acerca de...";
+
+        JOptionPane.showMessageDialog(null, mensaje, titulo, tipo);
+    }//GEN-LAST:event_miAcercaDeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,7 +467,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grpAdoptado;
     private javax.swing.ButtonGroup grpCastrado;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblAdoptado;
     private javax.swing.JLabel lblCastrado;
     private javax.swing.JLabel lblColor;
@@ -427,7 +478,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel lblRaza;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JMenu miRegistro;
+    private javax.swing.JMenu menu;
+    private javax.swing.JMenuItem miAcercaDe;
+    private javax.swing.JMenuItem miRegistro;
     private javax.swing.JRadioButton opEsterilizado;
     private javax.swing.JRadioButton opNoEsterilizado;
     private javax.swing.JPanel pnlNumero;
